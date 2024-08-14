@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #56c3b3;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    color: white;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    padding: 20px;
+}
+
+.content-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.image-section {
+    flex: 1;
+    text-align: center;
+    padding-right: 20px;
+    position: relative;
+}
+
+.image-section img {
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+.sample-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+    color: rgba(0, 0, 255, 0.3);
+    font-weight: bold;
+}
+
+.vertical-line {
+    width: 1px;
+    background-color: #ccc;
+    height: 100%;
+    margin: 0 20px;
+}
+
+.contact-info {
+    flex: 1;
+    margin-left: 20px;
+    padding-left: 20px;
+}
+
+.contact-info .support-icon {
+    display: block;
+    margin: 0 auto 20px;
+    width: 100px;
+    height: auto;
+}
+
+.contact-info ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.contact-info ul li {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
