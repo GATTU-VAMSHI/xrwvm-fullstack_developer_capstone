@@ -7,22 +7,63 @@
 <script>
 
 const logout = async (e) => {
-//Include the code for logout here.
-};
+            e.preventDefault();
+            let logout_url = window.location.origin + "/djangoapp/logout/";
+            const res = await fetch(logout_url, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+            });
 
-let checkSession = ()=>{
-  let curr_user = sessionStorage.getItem("username");
+            if (res.ok) {
+                const json = await res.json();
+                if (json.status === 'success') {
+                    let username = sessionStorage.getItem('username');
+                    sessionStorage.removeItem('username');
+                    alert("Logging out " + username + "...");
+                    window.location.href = window.location.origin;
+                    window.location.reload();
+                } else {
+                    alert("The user could not be logged out: " + json.message);
+                }
+            } else {
+                console.error('Logout failed with status: ' + res.status);
+                const errorText = await res.text();
+                console.error('Error details: ' + errorText);
+                alert("The user could not be logged out.");
+            }
+        };
 
-  if (curr_user && curr_user !== "") {
-    document.getElementById("loginlogout").innerHTML = 
-    '<span class="homepage_links">' + curr_user +'</span>' +
-    '<a class="homepage_links" onclick="logout()" href="/">Logout</a>'
-  } else {
-    document.getElementById("loginlogout").innerHTML = 
-    '<a class="homepage_links" href="/login">Login</a>'+
-    '<a class="homepage_links"  href="/register">Register</a>'
-  }
- }
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        let checkSession = () => {
+            let curr_user = sessionStorage.getItem("username");
+
+            if (curr_user && curr_user !== "") {
+                document.getElementById("loginlogout").innerHTML =
+                    '<span class="homepage_links">' + curr_user + '</span>' +
+                    '<a class="homepage_links" onclick="logout(event)" href="#">Logout</a>'
+            } else {
+                document.getElementById("loginlogout").innerHTML =
+                    '<a class="homepage_links" href="/login">Login</a>' +
+                    '<a class="homepage_links" href="/register">Register</a>'
+            }
+        }
 </script>
 </head>
 <body onload="checkSession()">
