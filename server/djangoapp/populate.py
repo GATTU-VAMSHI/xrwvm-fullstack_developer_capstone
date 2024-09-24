@@ -1,4 +1,4 @@
-from .models import CarMake, CarModel  
+from .models import CarMake, CarModel
 
 
 def initiate():
@@ -20,13 +20,13 @@ def initiate():
         )
 
     car_model_data = [
-        {"name": "Pathfinder", "type": "SUV", "year": 2023, 
+        {"name": "Pathfinder", "type": "SUV", "year": 2023,
          "car_make": car_make_instances[0]},
-        {"name": "Qashqai", "type": "SUV", "year": 2023, 
+        {"name": "Qashqai", "type": "SUV", "year": 2023,
          "car_make": car_make_instances[0]},
-        {"name": "XTRAIL", "type": "SUV", "year": 2023, 
+        {"name": "XTRAIL", "type": "SUV", "year": 2023,
          "car_make": car_make_instances[0]},
-        {"name": "A-Class", "type": "SUV", "year": 2023, 
+        {"name": "A-Class", "type": "SUV", "year": 2023,
          "car_make": car_make_instances[1]},
         # More car models...
     ]
