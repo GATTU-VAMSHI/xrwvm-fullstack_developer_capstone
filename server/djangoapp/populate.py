@@ -16,7 +16,7 @@ def initiate():
             CarMake.objects.create(
                 name=data['name'],
                 description=data['description']
-            )
+           )
         )
 
     car_model_data = [
