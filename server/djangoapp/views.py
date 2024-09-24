@@ -68,7 +68,7 @@ def registration(request):
     )
 
 
-# Update the `get_dealerships` to render list of dealerships, 
+# Update the `get_dealerships` to render list of dealerships,
 # all by default, or by state if provided
 def get_dealerships(request, state="All"):
     endpoint = "/fetchDealers" if state == "All" else f"/fetchDealers/{state}"
@@ -107,10 +107,14 @@ def add_review(request):
                 return JsonResponse(
                     {"status": 200, "message": "Review added successfully"}
                 )
-            return JsonResponse({"status": 400, "message": "Failed to add review"})
+            return JsonResponse(
+                {"status": 400, "message": "Failed to add review"}
+            )
         except Exception as e:
             logger.error(f"Error in posting review: {str(e)}")
-            return JsonResponse({"status": 401, "message": "Error in posting review"})
+            return JsonResponse(
+                {"status": 401, "message": "Error in posting review"}
+            )
     return JsonResponse({"status": 403, "message": "Unauthorized"})
 
 
