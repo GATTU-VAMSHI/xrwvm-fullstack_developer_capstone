@@ -32,7 +32,10 @@ def logout_request(request):
     if request.method == 'POST':
         logout(request)
         return JsonResponse({'status': 'success'})
-    return JsonResponse({'status': 'fail', 'message': 'Invalid request method'}, status=400)
+    return JsonResponse(
+        {'status': 'fail', 'message': 'Invalid request method'},
+        status=400
+    )
 
 
 # Create a `registration` view to handle sign up request
@@ -50,18 +53,23 @@ def registration(request):
         username_exist = True
     except User.DoesNotExist:
         logger.debug(f"{username} is a new user")
-    
+
     if not username_exist:
         user = User.objects.create_user(
-            username=username, first_name=first_name, 
+            username=username, first_name=first_name,
             last_name=last_name, password=password, email=email
         )
         login(request, user)
-        return JsonResponse({"userName": username, "status": "Authenticated"})
-    return JsonResponse({"userName": username, "error": "Already Registered"})
+        return JsonResponse(
+            {"userName": username, "status": "Authenticated"}
+        )
+    return JsonResponse(
+        {"userName": username, "error": "Already Registered"}
+    )
 
 
-# Update the `get_dealerships` to render list of dealerships, all by default, or by state if provided
+# Update the `get_dealerships` to render list of dealerships, 
+# all by default, or by state if provided
 def get_dealerships(request, state="All"):
     endpoint = "/fetchDealers" if state == "All" else f"/fetchDealers/{state}"
     dealerships = get_request(endpoint)
@@ -96,7 +104,9 @@ def add_review(request):
         try:
             response = post_review(data)
             if response.status_code == 200:
-                return JsonResponse({"status": 200, "message": "Review added successfully"})
+                return JsonResponse(
+                    {"status": 200, "message": "Review added successfully"}
+                )
             return JsonResponse({"status": 400, "message": "Failed to add review"})
         except Exception as e:
             logger.error(f"Error in posting review: {str(e)}")
