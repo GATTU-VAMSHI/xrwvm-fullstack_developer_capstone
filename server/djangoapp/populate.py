@@ -1,4 +1,4 @@
-from .models import CarMake, CarModel  # Ensure CarMake and CarModel are imported
+from .models import CarMake, CarModel  
 
 
 def initiate():
